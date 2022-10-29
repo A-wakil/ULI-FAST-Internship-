@@ -1,3 +1,5 @@
+import numpy as np
+import matplotlib.pyplot as plt
 # v = a*t +vo (a = -9.8m/s)
 x0 = 30
 v0 = 6
@@ -10,31 +12,39 @@ def v(time, h):
   else :
     return -9.8*(h) + v(time-h,h)
 #Function that returns the position at a given time    
-def position(time, h):
+def position(time,h):
   if time == 0:
     return x0
   else:
     return position(time-h,h) + h*v(time-h,h)
-#print(position(2,0.5))
-print(position(0,1))
-print(position(1,1))
-print(position(2,1))
-print(position(3,1))
-print()
-print('******************************')
-print()
-print('*',position(0,0.25))
-print('*',position(1,0.25))
-print('*',position(2.0,0.25))
-print('*',position(3.0,0.25))
-
 
 #function for the actual value of x, which is an inegration of v
 def actual(t):
   return -4.9*t*t + v0*t + x0
-print('****************************')
 
+domain1 = [i for i in range(0,4,1)]
+print(domain1)
+domain2 = [j/4 for j in range(0,13)]
+print(domain2)
+domain_a = np.linspace(0, 3, 100)
 
-for i in range(4):
-  print(actual(i))
+range1 = []
+for domain in domain1:
+  range1.append(position(domain,1))
+range2 = []
+for domain in domain2:
+  range2.append(position(domain,0.25))
+print(range1)
+print(range2)
+actual_range = actual(domain_a)
+
+plt.figure(num = 1, dpi = 65)
+plt.plot(domain1, range1, label = "Euler's X(t) : h=1")
+plt.plot(domain2, range2, label = "Euler's X(t) : h=0.25")
+plt.plot(domain_a, actual_range, label = "Analytical (Actual solution)")
+plt.title("Euler's Function (Numerical method) in comparison with the analytical method (Intergration)")
+plt.xlabel("time/sec")
+plt.ylabel("position (distance)/m")
+plt.legend()
+plt.show()
     
