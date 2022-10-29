@@ -24,11 +24,8 @@ print()
 print('******************************')
 print()
 print('*',position(0,0.25))
-print(position(0.5,0.5))
 print('*',position(1,0.25))
-print(position(1.5,0.5))
 print('*',position(2.0,0.25))
-print(position(2.5,0.5))
 print('*',position(3.0,0.25))
 
 
